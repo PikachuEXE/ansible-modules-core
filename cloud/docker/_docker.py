@@ -1624,7 +1624,6 @@ class DockerManager(object):
                   'ports':        self.exposed_ports,
                   'volumes':      self.volumes,
                   'environment':  self.environment,
-                  'labels':       self.module.params.get('labels'),
                   'hostname':     self.module.params.get('hostname'),
                   'domainname':   self.module.params.get('domainname'),
                   'detach':       self.module.params.get('detach'),
@@ -1635,6 +1634,8 @@ class DockerManager(object):
                   'cpu_shares':   self.module.params.get('cpu_shares'),
                   'user':         self.module.params.get('docker_user'),
                   }
+        if self.ensure_capability('labels', fail=False):
+            params['labels'] = self.module.params.get('labels')
         if self.ensure_capability('host_config', fail=False):
             params['host_config'] = self.create_host_config()
 
