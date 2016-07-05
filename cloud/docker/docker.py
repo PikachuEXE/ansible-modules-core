@@ -117,7 +117,7 @@ options:
     version_added: "2.0"
   log_opt:
     description:
-      - Additional options to pass to the logging driver selected above. See Docker `log-driver 
+      - Additional options to pass to the logging driver selected above. See Docker `log-driver
         <https://docs.docker.com/reference/logging/overview/>` documentation for more information.
         Requires docker >=1.7.0.
     required: false
@@ -1612,6 +1612,8 @@ def restarted(manager, containers, count, name):
     for container in manager.get_differing_containers():
         manager.stop_containers([container])
         manager.remove_containers([container])
+
+    containers.refresh()
 
     manager.restart_containers(containers.running)
     started(manager, containers, count, name)
