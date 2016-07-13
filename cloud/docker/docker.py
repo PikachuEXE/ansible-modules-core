@@ -117,7 +117,7 @@ options:
     version_added: "2.0"
   log_opt:
     description:
-      - Additional options to pass to the logging driver selected above. See Docker `log-driver 
+      - Additional options to pass to the logging driver selected above. See Docker `log-driver
         <https://docs.docker.com/reference/logging/overview/>` documentation for more information.
         Requires docker >=1.7.0.
     required: false
@@ -1173,7 +1173,7 @@ class DockerManager(object):
             # STDIN_OPEN
 
             expected_stdin_open = self.module.params.get('stdin_open')
-            actual_stdin_open = container['Config']['AttachStdin']
+            actual_stdin_open = container['Config']['OpenStdin']
             if actual_stdin_open != expected_stdin_open:
                 self.reload_reasons.append('stdin_open ({0} => {1})'.format(actual_stdin_open, expected_stdin_open))
                 differing.append(container)
